@@ -15,5 +15,6 @@ public interface MainActivityContract {
 
     interface presenter extends BasePresenter<view> {
 
+        void loadMovies(String movieTitle);
     }
 }
