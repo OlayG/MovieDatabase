@@ -1,11 +1,13 @@
 package com.example.admin.moviedatabase.retrofit;
 
+import com.example.admin.moviedatabase.model.DetailsMovie;
 import com.example.admin.moviedatabase.model.SearchMovie;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -30,14 +32,6 @@ public class RetrofitHelper {
 
         return retrofit;
     }
-/*
-    public static Call<HourlyTenDay> callMovieDetails(String movieID) {
-
-        Retrofit retrofit = create(BASE_URL);
-        WeatherService weatherService = retrofit.create(WeatherService.class);
-
-        return weatherService.getHourlyTenDay(zipcode);
-    }*/
 
     public static Call<SearchMovie> callMovieList(String bookTitle) {
 
@@ -47,14 +41,22 @@ public class RetrofitHelper {
         return weatherService.getMovieList(bookTitle);
     }
 
+    public static Call<DetailsMovie> callMovieDetails(String movieId) {
+
+        Retrofit retrofit = create(BASE_URL);
+        WeatherService weatherService = retrofit.create(WeatherService.class);
+
+        return weatherService.getMovieDetails(movieId);
+    }
+
 
     public interface WeatherService {
 
         @GET(SEARCH_PATH)
         Call<SearchMovie> getMovieList(@Query("query") String bookTitle);
 
-     /*   @GET(DETAILS_PATH)
-        Call<Conditions> getMovieDetails(@Path("movie_id") String movieID);*/
+        @GET(DETAILS_PATH)
+        Call<DetailsMovie> getMovieDetails(@Path("movie_id") String movieID);
 
     }
 
